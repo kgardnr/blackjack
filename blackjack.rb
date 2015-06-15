@@ -12,30 +12,34 @@
 # 12. Otherwise, stay
 # 13. Winner has cards that equal 21, or other person busts
 
+require 'pry'
 
-#52 cards in a deck
-#4 suits
-#13 cards per suit
+def calculate_total(cards)
+  card_values = cards.map { |c| c[0] }
+
+  total = 0
+  card_values.each do |value|
+    if value.to_i == 0
+      total += 10
+    else
+      total += value.to_i
+    end
+  end
+
+  total
+end
 
 cards = %w(2 3 4 5 6 7 8 9 10 J Q K A)
 suits = %w(Hearts Clubs Spades Diamonds)
-deck = suits.product(cards)
+deck = cards.product(suits)
 
-puts "Welcome to Blackjack!"
-puts "What's your name?"
-
-name = gets.chomp
-name.capitalize!
-
-puts "Hello, #{name}, let's see if your luck holds out."
-
-puts "=> Shuffling cards."
-sleep 1
+#puts "Welcome to Blackjack!"
+#puts "What's your name?"
+#name = gets.chomp
+#name.capitalize!
+#puts "Hello, #{name}, let's see if your luck holds out."
 
 deck.shuffle!
-
-puts "=> Dealing cards."
-sleep 1
 
 player_cards = []
 dealer_cards = []
@@ -45,6 +49,11 @@ dealer_cards << deck.pop
 player_cards << deck.pop
 dealer_cards << deck.pop
 
-p player_cards
-p dealer_cards
+puts "Your cards: #{player_cards[0]} and #{player_cards[1]}"
+puts "Dealer cards: #{dealer_cards[0]} and #{player_cards[1]}"
 
+player_total = calculate_total(player_cards)
+dealer_total = calculate_total(dealer_cards)
+
+p player_total
+p dealer_total
