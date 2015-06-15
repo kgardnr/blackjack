@@ -1,7 +1,3 @@
-# 1. Create a deck of cards
-# 2. Shuffle cards
-# 3. Deal starting with Player, until both have 2 cards
-# 4. Display cards
 # 5. Ask Player if they want to hit or stay
 # 6. If stay, Dealer's turn
 # 7. If hit, give Player another card
@@ -15,15 +11,22 @@
 require 'pry'
 
 def calculate_total(cards)
-  card_values = cards.map { |c| c[0] }
+  card_values = cards.map { |e| e[0] }
 
   total = 0
   card_values.each do |value|
-    if value.to_i == 0
+    if value == "A"
+      total += 11
+    elsif value.to_i == 0 # accounts for J, Q, K
       total += 10
     else
       total += value.to_i
     end
+  end
+
+  # correct for Aces
+  card_values.select { |e| e == "A" }.count.times do
+    total -= 10 if total > 21
   end
 
   total
@@ -50,7 +53,7 @@ player_cards << deck.pop
 dealer_cards << deck.pop
 
 puts "Your cards: #{player_cards[0]} and #{player_cards[1]}"
-puts "Dealer cards: #{dealer_cards[0]} and #{player_cards[1]}"
+puts "Dealer cards: #{dealer_cards[0]} and #{dealer_cards[1]}"
 
 player_total = calculate_total(player_cards)
 dealer_total = calculate_total(dealer_cards)
