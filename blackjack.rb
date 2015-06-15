@@ -21,6 +21,16 @@ cards = %w(2 3 4 5 6 7 8 9 10 J Q K A)
 suits = %w(Hearts Clubs Spades Diamonds)
 deck = suits.product(cards)
 
-p deck
+deck.shuffle!
 
+player_cards = []
+dealer_cards = []
+
+player_cards << deck.pop
+dealer_cards << deck.pop
+player_cards << deck.pop
+dealer_cards << deck.pop
+
+p player_cards
+p dealer_cards
 
