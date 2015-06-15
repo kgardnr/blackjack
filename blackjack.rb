@@ -21,7 +21,21 @@ cards = %w(2 3 4 5 6 7 8 9 10 J Q K A)
 suits = %w(Hearts Clubs Spades Diamonds)
 deck = suits.product(cards)
 
+puts "Welcome to Blackjack!"
+puts "What's your name?"
+
+name = gets.chomp
+name.capitalize!
+
+puts "Hello, #{name}, let's see if your luck holds out."
+
+puts "=> Shuffling cards."
+sleep 1
+
 deck.shuffle!
+
+puts "=> Dealing cards."
+sleep 1
 
 player_cards = []
 dealer_cards = []
