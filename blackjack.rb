@@ -36,21 +36,29 @@ cards = %w(2 3 4 5 6 7 8 9 10 J Q K A)
 suits = %w(Hearts Clubs Spades Diamonds)
 deck = cards.product(suits)
 
-#puts "Welcome to Blackjack!"
-#puts "What's your name?"
-#name = gets.chomp
-#name.capitalize!
-#puts "Hello, #{name}, let's see if your luck holds out."
+puts "Welcome to Blackjack!"
+puts "What's your name?"
+name = gets.chomp
+name.capitalize!
+puts "Hello, #{name}, let's see if your luck holds out."
 
 deck.shuffle!
 
 player_cards = []
 dealer_cards = []
 
-player_cards << deck.pop
-dealer_cards << deck.pop
-player_cards << deck.pop
-dealer_cards << deck.pop
+def deal_player_card(player_cards, deck)
+  player_cards << deck.pop
+end
+
+def deal_dealer_card(dealer_cards, deck)
+  dealer_cards << deck.pop
+end
+
+deal_player_card(player_cards, deck)
+deal_dealer_card(dealer_cards, deck)
+deal_player_card(player_cards, deck)
+deal_dealer_card(dealer_cards, deck)
 
 puts "Your cards: #{player_cards[0]} and #{player_cards[1]}"
 puts "Dealer cards: #{dealer_cards[0]} and #{dealer_cards[1]}"
@@ -60,3 +68,16 @@ dealer_total = calculate_total(dealer_cards)
 
 p player_total
 p dealer_total
+
+puts "Would you like to hit or stay?"
+puts "Select H for hit or S for stay."
+choice = gets.chomp.downcase
+
+if choice == "h"
+  deal_player_card(player_cards, deck)
+  puts "Your cards: #{player_cards[0]}, #{player_cards[1]}, #{player_cards[2]}"
+  player_total = calculate_total(player_cards)
+  p player_total
+else choice == "s"
+  puts "Dealer's turn."
+end
